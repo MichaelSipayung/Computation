@@ -1,10 +1,13 @@
 #include "headerComput.h"
+//apply extern
+int max;
+char line[MAXLINE],longest[MAXLINE];
 int main() {
     printf("Apply to Computation .... \n");
     //myArCount();
     printf("power of (3,2) is \t: %d\n", power(3,2));
-    printf("Test function test copy .... ");
-    testCopy();
+    //printf("Test function test copy .... ");
+    //testCopy();
     return 0;
 }
 int countLine(){
@@ -104,5 +107,17 @@ void testCopy(){
         printf("Result, after copy \t: %s", longest);
     }
 }
+int getExline(){
+    //..put extern variable here
+    int len;
+    extern char line[];
+    //all algorithm are equals
+}
+void copyEx(){
+    int i ;
+    extern char line[],longest[];
+    //all algorithm aare equal as before  ....
+}
+
 
 

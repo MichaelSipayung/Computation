@@ -17,4 +17,8 @@ int power(int,int);
 int getline(char[],int);
 void copy(char[],char[]);
 void testCopy();
+int getExline();
+void copyEx();
+int max;
+
 #endif //COMPUTATION_HEADERCOMPUT_H
