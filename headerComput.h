@@ -9,8 +9,12 @@
 #define OUT 0
 #define IN 1
 #define ERR -1
+#define MAXLINE 1000
 int countLine();
 void countWord();
 void myArCount();
 int power(int,int);
+int getline(char[],int);
+void copy(char[],char[]);
+void testCopy();
 #endif //COMPUTATION_HEADERCOMPUT_H

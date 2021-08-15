@@ -3,6 +3,8 @@ int main() {
     printf("Apply to Computation .... \n");
     //myArCount();
     printf("power of (3,2) is \t: %d\n", power(3,2));
+    printf("Test function test copy .... ");
+    testCopy();
     return 0;
 }
 int countLine(){
@@ -66,4 +68,41 @@ int power(int base,int n){
     }
     return p;
 }
+int getline(char s[],int lim){
+    int c;
+    int j;
+    for ( j = 0; j < lim-1 &&(c=getchar())!='x' && c!='\n'; ++j) {
+        s[j]=c;
+    }
+      if(c =='\n'){
+          s[j]=c;
+          ++j;
+      }
+      s[j]='\0';
+
+    return j;
+}
+void copy(char to[],char from[] ){
+    int i;
+    i=0;
+    while ((to[i]=from[i])!='\0'){
+        ++i;
+    }
+}
+void testCopy(){
+    int len,max;
+    char line[MAXLINE];
+    char longest[MAXLINE];
+    max=0;
+    while ((len= getline(line,MAXLINE))>0){
+        if(len>max){
+            max=len;
+            copy(longest,line);
+        }
+    }
+    if(max>0){
+        printf("Result, after copy \t: %s", longest);
+    }
+}
+
 
