@@ -1,7 +1,3 @@
-//
-// Created by zyrex on 8/14/2021.
-//
-
 #ifndef COMPUTATION_HEADERCOMPUT_H
 #define COMPUTATION_HEADERCOMPUT_H
 #include <stdio.h>
@@ -37,4 +33,7 @@ double pop();
 void push(double);
 void swap(int[],int ,int);
 void qsorts(int [],int,int);
-#endif //COMPUTATION_HEADERCOMPUT_H
+
+void showMax(int,int);
+void showMin(int,int);
+#endif

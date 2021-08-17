@@ -1,14 +1,34 @@
 #include "headerComput.h"
+#include "algorit.h"
+#include "pointer.c"
+#include "sqlite3.h"
 //apply extern
 int max;
 char line[MAXLINE],longest[MAXLINE];
-int main() {
+int main(int argc,char *argv[]) {
     printf("Apply to Computation .... \n");
     //myArCount();
     printf("power of (3,2) is \t: %d\n", power(3,2));
     //printf("Test function test copy .... ");
     //testCopy();
     testBessel();
+    printf("test macro substitution  .... \n");
+    showMax(13,18);
+    showMin(13,18);
+    pointerTest();
+    int aSwap=13;
+    int ySwap=90;
+    swap_v(&aSwap,&ySwap);
+    char pointImp[]="implementasi pointer";
+    printf("Total character \t: %d item\n", strlen_p(pointImp));
+    printf("Total character \t: %d item\n", strlens(pointImp));
+    printf("Command line argument .... \n");
+    int iCommand;
+    for(iCommand=1;iCommand<argc;iCommand++){
+        printf("%s %s",argv[iCommand],(iCommand<argc-1)? " ": "");
+    }
+    printf("Sqlite version ..... %s \n",sqlite3_libversion());
+    callScreen();
     return 0;
 }
 int countLine(){
@@ -202,7 +222,6 @@ double atofN(char s[]){
     }
     return sign*val/power;
 }
-
 void testBessel(){
     printf("Test bessel function .... \n");
     double  x=5.0;
@@ -219,7 +238,6 @@ double pop(){
         return 0.0;
     }
 }
-
 void push(double f){
     if(sp<MAXVAL){
         val[sp++] = f;
@@ -250,8 +268,111 @@ void qsorts(int v[],int left,int right){
     qsorts(v,left,last-1);
     qsorts(v,last+1,right);
 }
-
-
+void showMax(int f,int l){
+    printf("max of given two number is \t: %d\n", maxx(f,l));
+}
+void showMin(int f,int l){
+    printf("min of given two number is \t: %d\n", minn(f,l));
+}
+void pointerTest(){
+    int x=12,*y=&x;
+    printf("current (x)\t:%d , and (y)\t:%d\n", x,*y);
+    *y=18;
+    printf("After modify\n");
+    printf("current (x)\t:%d , and (y)\t:%d\n", x,*y);
+}
+void swap_v(int*x,int*y){
+    int temp;
+    printf("Interchange two value through pointer call ...\n");
+    temp=*x;
+    *x=*y;
+    *y=temp;
+    printf("After swap (x)\t: %d\n", *x);
+    printf("After swap (y)\t: %d\n", *y);
+}
+int strlen_p(char*testPointer){
+    int len;
+    for(len=0;*testPointer!='\0';testPointer++){
+        ++len;
+    }
+    return  len;
+}
+int strlens(char*s){
+    char *p=s;//equivalent call to &s[0]
+    while (*p!='\0'){
+        p++;
+    }
+    return p-s; //substract a pointer
+}
+void moving(char*v[],int i,int j){
+    char *temp;
+    temp=v[i];
+    v[i]=v[j];
+    v[j]=temp;
+}
+char *month_name(int n){
+    static char *name[]={
+            "illegal","month",
+            "january","february","march","april","may","june",
+            "july","august","september","october","november","december"
+    };
+}
+int numcmp(char *s1,char *s2){
+    double v1,v2;
+    v1= atof(s1);
+    v2= atof(s2);
+    if(v1<v2){
+        return -1;
+    }
+    else if(v1>v2){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+void modifySwap(void *v[],int i,int j){
+    void *temp;  //an example for function that return the pointer
+    temp =v[i];
+    v[i]=v[j];
+    v[j]=temp;
+}
+struct point makePoint(int x,int y){
+    struct point temp;
+    temp.x=x;
+    temp.y=y;
+    return temp;
+}
+void callScreen(){
+    screen.pt1 = makePoint(0,0);
+    printf("Sizeof screen \t: %d byte \n", sizeof(screen));
+}
+struct rect canonRect(struct rect r){
+    struct rect temp;
+    temp.pt1.x= minF(r.pt1.x,r.pt2.x);
+    temp.pt1.y= minF(r.pt1.y,r.pt2.y);
+    temp.pt2.x= maxF(r.pt1.y,r.pt2.y);
+    return temp;
+}
+struct key *binaryTest(char *word,struct key* tab,int n){
+    int cond;
+    struct key *low= &tab[0];
+    struct key *high = &tab[n];
+    struct key *mid;
+    while (low<high){
+        mid = low +(high-low)/2;
+        if((cond= strcmp(word,mid->word))<0){
+            high=mid;
+        }
+        else if(cond>0){
+            low =mid+1;
+        }
+        else{
+            return mid;
+        }
+    }
+    return NULL;
+}
 
 
 
